@@ -40,9 +40,8 @@ public class halloween extends JFrame implements ActionListener,ChangeListener{
   private JButton letguess;// button to letguess
   private JPanel panelsugar;
   private int feel;
-  int emotState;
   private JLabel drive_result;
-  halloween(){
+  public halloween(){
 
 
 
@@ -182,12 +181,12 @@ public void actionPerformed(ActionEvent event){
 
 
 
-  public static void main(String[] args) {
-    halloween person = new halloween();
+  //public static void main(String[] args) {
+    //halloween person = new halloween();
 
 
 
 
-  }// end of main
+  //}// end of main
 
 }// end of class
