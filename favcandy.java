@@ -1,14 +1,12 @@
 /*CSCE 111 Section 502
 GUI Calculator Method: Should you drive
-This calculator collects information from you and determines whether or not
-you should drive right now. This is not a calculator that should be used outside
-of this class and is created PURELY for me to understand class concepts.
+This time waster takes your age and flavor preference to guess your favorite candy.
 Name: Liliana Hildebrand
 UIN: 930006956
 Additional Source: https://www.geeksforgeeks.org/path-relativize-method-in-java-with-examples/
 */
 public class favcandy {
-private int Taste;// this is the emotional state they are in at the moment
+private int Taste;// this is the taste they like the most
 private  double PersonAge;
 public void  setTaste( int flavor){
   Taste = flavor;
