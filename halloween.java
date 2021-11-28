@@ -1,9 +1,7 @@
 /*
 CSCE 111 Section 502
 Liliana's Time Waster: Halloween
-This calculator collects information from you and determines whether or not
-you should drive right now. This is not a calculator that should be used outside
-of this class and is created PURELY for me to understand class concepts.
+This time waster collects input about your taste preference and your age to guess your favorite Halloween candy.
 Name: Liliana Hildebrand
 UIN: 930006956
 Additional Source: https://www.geeksforgeeks.org/path-relativize-method-in-java-with-examples/
@@ -32,15 +30,14 @@ public class halloween extends JFrame implements ActionListener,ChangeListener{
   private static final int FRAME_WIDTH = 500;
   private static final int FRAME_HEIGHT = 500;
   private JSlider sugarlevel;// to intake sugarlevel
-  private JLabel ageLabel;// label for hours slept
-  private JLabel sugarlevelLabel;// label for how they feeling
-  private JFormattedTextField age;// text field of hours slept
-  private JFormattedTextField hrsF;// text field for hours since food
-  private JFormattedTextField can_results;// tell the person if they should drive
+  private JLabel ageLabel;// label for age
+  private JLabel sugarlevelLabel;// label for test preference
+  private JFormattedTextField age;// text field age
+  private JFormattedTextField can_results;// tell the person what their favorite candy is
   private JButton letguess;// button to letguess
   private JPanel panelsugar;
   private int feel;
-  private JLabel drive_result;
+  private JLabel candy_favorite;// the final result
   public halloween(){
 
 
@@ -81,7 +78,7 @@ sugarlevel.setPaintLabels(true);
   //Creating the labels
   JLabel ageLabel = new JLabel("How old are you?");
   JLabel sugarlevelLabel = new JLabel("On a scale of 0 being bitter, 5 being sour, and 10 being very sweet, what flavor do you like your candy to have?");
-  JLabel drive_result = new JLabel("Your favorite candy is...");
+  JLabel candy_favorite = new JLabel("Your favorite candy is...");
   //Creating the text fields
   age = new JFormattedTextField(NumberFormat.getNumberInstance());
   //age.addChangeListener(this);
@@ -129,7 +126,7 @@ sugarlevel.setPaintLabels(true);
   grid.gridx = 0;
   grid.gridy = 30;
   grid.insets = new Insets(5,5,5,5);
-  add(drive_result,grid);
+  add(candy_favorite,grid);
 
   grid = new GridBagConstraints();
   grid.gridx = 0;
