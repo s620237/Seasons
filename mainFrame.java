@@ -26,11 +26,13 @@ class mainFrame extends JFrame {
     winterButton = new JButton("Winter (Catherine)");
     springButton = new JButton("Spring (Patrick)");
     summerButton = new JButton("Summer (Luke)");
+    JButton fortuneButton = new JButton("click"); //this is because FortuneButton was being finnicky with compiling inside springListener it's not called the only purpose is to create the class.
     vivaldiButton = new JButton("click");
     fallButton.setBackground(Color.ORANGE);
     winterButton.setBackground(Color.WHITE);
     springButton.setBackground(Color.GREEN);
     summerButton.setBackground(Color.PINK);
+    fortuneButton.addActionListener(new FortuneButton()); //also only for getting FortuneButton to compile when running mainFrame
     fallPanel = new JPanel();
     winterPanel = new JPanel();
     springPanel = new JPanel();
