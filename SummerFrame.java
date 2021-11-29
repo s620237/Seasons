@@ -25,7 +25,7 @@ public class SummerFrame extends JFrame implements KeyListener {
   private boolean delay = false;
   private Timer timer = new Timer();
   private GameplayScreen screen = new GameplayScreen();
-  private long DELAY_TIME = 2000;
+  private long DELAY_TIME = 3000;
 
   TimerTask aTask = new TimerTask() {
     @Override
@@ -64,7 +64,7 @@ public class SummerFrame extends JFrame implements KeyListener {
     setSize(800,400);
     setLocationRelativeTo(null);
     setResizable(false);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     setVisible(true);
     timer.scheduleAtFixedRate(aTask, new Date(), 1);
   }
