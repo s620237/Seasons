@@ -20,13 +20,13 @@ class mainFrame extends JFrame {
   public mainFrame() {
     setLayout(new GridBagLayout());
     setSize(300,400);
+    setTitle("Four Seasons");
     mainFrameConst = new GridBagConstraints();
-    fallButton = new JButton("Fall");
-    winterButton = new JButton("Winter");
-    springButton = new JButton("Spring");
-    summerButton = new JButton("Summer");
+    fallButton = new JButton("Fall (Liliana)");
+    winterButton = new JButton("Winter (Catherine)");
+    springButton = new JButton("Spring (Patrick)");
+    summerButton = new JButton("Summer (Luke)");
     vivaldiButton = new JButton("click");
-    JButton fortuneButton = new JButton("click"); //this is because FortuneButton was being finnicky with compiling inside springListener it's not called the only purpose is to create the class.
     fallButton.setBackground(Color.ORANGE);
     winterButton.setBackground(Color.WHITE);
     springButton.setBackground(Color.GREEN);
@@ -35,15 +35,14 @@ class mainFrame extends JFrame {
     winterPanel = new JPanel();
     springPanel = new JPanel();
     summerPanel = new JPanel();
-    fortuneButton.addActionListener(new FortuneButton());
-  //  fallButton.addActionListener(new fallListener());
-  //  winterButton.addActionListener(new winterListener());
+    fallButton.addActionListener(new fallListener());
+    winterButton.addActionListener(new winterListener());
     springButton.addActionListener(new springListener());
-    //summerButton.addActionListener(new summerListener());
-    //vivaldiButton.addActionListener(new vivaldiListener());
-    //fallPanel.add(fallButton);
-  //  winterPanel.add(winterButton);
-  //  summerPanel.add(summerButton);
+    summerButton.addActionListener(new summerListener());
+    vivaldiButton.addActionListener(new vivaldiListener());
+    fallPanel.add(fallButton);
+    winterPanel.add(winterButton);
+    summerPanel.add(summerButton);
     springPanel.add(springButton);
     mainFrameConst.gridx = 0;
     mainFrameConst.gridy = 0;
