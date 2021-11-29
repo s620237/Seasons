@@ -15,14 +15,18 @@ import java.awt.Point;
 // HistogramComponent extends the functionality of a JComponent
 // in order to draw a histogram.
 public class GameplayScreen extends JComponent{
+   // Player Info
    private int PLAYER_WIDTH = 50;
    private int PLAYER_HEIGHT = 10;
+   // Obstacle Info
    private int NUM_ROCKS = 12;
    private int NUM_SHARKS = 4;
    private int NUM_SQUIDS = 2;
-
+   // Decor Info
    private int NUM_PALMS = 4;
    private int NUM_PIERS = 2;
+   private int NUM_BTOWELS = 1;
+   private int NUM_BBALLS = 1;
    // Key Global Elements
    private int playerScore = 0;
    private double grid1Position = 800;
@@ -30,31 +34,30 @@ public class GameplayScreen extends JComponent{
    private double worldSpeed = 0.2;
    // Player and Decor starting Positions
    private Point playerPnt = new Point(25, 300);
-   private Point bBall1Pnt = new Point(900, 40);
-   private Point bTowelsPnt = new Point(400, 40);
-   // Rock Stuff
+   private SummerObject player = new SummerObject(playerPnt);
+   // Rock Array Insantiation
    private SummerObject[] rockArray = new SummerObject[NUM_ROCKS];
    private Point[] rockPntArray = new Point[NUM_ROCKS];
-   // Shark Stuff
+   // Shark Array Insantiation
    private SummerObject[] sharkArray = new SummerObject[NUM_SHARKS];
    private Point[] sharkPntArray = new Point[NUM_SHARKS];
-   // Squid Stuff
+   // Squid Array Insantiation
    private SummerObject[] squidArray = new SummerObject[NUM_SQUIDS];
    private Point[] squidPntArray = new Point[NUM_SQUIDS];
-   // Pier Stuff
+   // Pier Array Insantiation
    private SummerObject[] pierArray = new SummerObject[NUM_PIERS];
    private Point[] pierPntArray = new Point[NUM_PIERS];
-   // Palm Stuff
+   // Palm Array Insantiation
    private SummerObject[] palmArray = new SummerObject[NUM_PALMS];
    private Point[] palmPntArray = new Point[NUM_PALMS];
-   // Player and Decor Object Instantiation
-   private SummerObject player = new SummerObject(playerPnt);
-   private SummerObject bBall1 = new SummerObject();
-   private SummerObject bTowels = new SummerObject();
-
+   // Beach Towel Array Insantiation
+   private SummerObject[] bTowelsArray = new SummerObject[NUM_BTOWELS];
+   private Point[] bTowelsPntArray = new Point[NUM_BTOWELS];
+   // Beach Ball Array Insantiation
+   private SummerObject[] bBallArray = new SummerObject[NUM_BBALLS];
+   private Point[] bBallPntArray = new Point[NUM_BBALLS];
    // Arrays for polygon
-   private int[] xPoints = null;
-   private int[] yPoints = null;
+
    // Dimensions for Grids (obstacle locations on ocean)
    // starts at 13, ends 12 away from bottom - each object is 50 pixels tall and 50 wide
    // Dimensions: 6 down, 16 across
@@ -66,7 +69,7 @@ public class GameplayScreen extends JComponent{
    private boolean isBlackOut = false;
 
    // Scatters objects across grid1
-   public void setGridPos1(Point pt) {
+   public Point setGridPos1(Point pt) {
      int randx, randy;
      do {
        randx = rand.nextInt(16);
@@ -74,9 +77,10 @@ public class GameplayScreen extends JComponent{
      } while (objArray1[randx][randy] == 1);
      objArray1[randx][randy] = 1;
      pt.setLocation(randx * 50 + grid1Position, randy * 50 + 110);
+     return pt;
    }
    // Scatters objects across grid2
-   public void setGridPos2(Point pt) {
+   public Point setGridPos2(Point pt) {
      int randx, randy;
      do {
        randx = rand.nextInt(16);
@@ -84,6 +88,7 @@ public class GameplayScreen extends JComponent{
      } while (objArray2[randx][randy] == 1);
      objArray2[randx][randy] = 1;
      pt.setLocation(randx * 50 + grid2Position, randy * 50 + 110);
+     return pt;
    }
 
    // Instantiate objects
@@ -107,6 +112,14 @@ public class GameplayScreen extends JComponent{
      for (int i = 0; i < NUM_PALMS; i++) {
        palmArray[i] = new SummerObject();
        palmPntArray[i] = new Point(rand.nextInt(800) * i, 60);
+     }
+     for (int i = 0; i < NUM_BTOWELS; i++) {
+       bTowelsArray[i] = new SummerObject();
+       bTowelsPntArray[i] = new Point(rand.nextInt(350) * i + 400, 40);
+     }
+     for (int i = 0; i < NUM_BBALLS; i++) {
+       bBallArray[i] = new SummerObject();
+       bBallPntArray[i] = new Point(900, 40);
      }
    }
    // After game starts (or restarts), set initial points of objects, grids, and speeds
@@ -135,8 +148,8 @@ public class GameplayScreen extends JComponent{
        // Move Beach objects
        for (int i = 0; i < NUM_PIERS; i++) pierArray[i].moveDecor(worldSpeed);
        for (int i = 0; i < NUM_PALMS; i++) palmArray[i].moveDecor(worldSpeed);
-       bBall1.moveDecor(worldSpeed);
-       bTowels.moveDecor(worldSpeed);
+       for (int i = 0; i < NUM_BTOWELS; i++) bTowelsArray[i].moveDecor(worldSpeed);
+       for (int i = 0; i < NUM_BBALLS; i++) bBallArray[i].moveDecor(worldSpeed);
        // Move Obstacles on Grid 1
        for (int i = 0; i < NUM_ROCKS; i++) rockArray[i].moveObject(worldSpeed);
        for (int i = 0; i < NUM_SHARKS; i++) sharkArray[i].moveObject(worldSpeed);
@@ -160,44 +173,24 @@ public class GameplayScreen extends JComponent{
    public void spawnDecor() {
      for (int i = 0; i < NUM_PIERS; i++) pierArray[i].setPoint(pierPntArray[i]);
      for (int i = 0; i < NUM_PALMS; i++) palmArray[i].setPoint(palmPntArray[i]);
-     bBall1.setPoint(bBall1Pnt);
-     bTowels.setPoint(bTowelsPnt);
+     for (int i = 0; i < NUM_BTOWELS; i++) bTowelsArray[i].setPoint(bTowelsPntArray[i]);
+     for (int i = 0; i < NUM_BBALLS; i++) bBallArray[i].setPoint(bBallPntArray[i]);
    }
 
    // Sets the objects initial position to the right of the screen and creates them
+   // Grid 1
    public void spawnObjects1() {
      for (int i = 0; i < 16; i++) for (int j = 0; j < 6; j++) objArray1[i][j] = 0;
-     // Grid 1
-     for (int i = 0; i < NUM_ROCKS/2; i++) {
-       setGridPos1(rockPntArray[i]);
-       rockArray[i].setPoint(rockPntArray[i]);
-     }
-     for (int i = 0; i < NUM_SHARKS/2; i++) {
-       setGridPos1(sharkPntArray[i]);
-       sharkArray[i].setPoint(sharkPntArray[i]);
-     }
-     for (int i = 0; i < NUM_SQUIDS/2; i++) {
-       setGridPos1(squidPntArray[i]);
-       squidArray[i].setPoint(squidPntArray[i]);
-     }
-
+     for (int i = 0; i < NUM_ROCKS/2; i++) rockArray[i].setPoint(setGridPos1(rockPntArray[i]));
+     for (int i = 0; i < NUM_SHARKS/2; i++) sharkArray[i].setPoint(setGridPos1(sharkPntArray[i]));
+     for (int i = 0; i < NUM_SQUIDS/2; i++) squidArray[i].setPoint(setGridPos1(squidPntArray[i]));
    }
+   // Grid 2
    public void spawnObjects2() {
      for (int i = 0; i < 16; i++) for (int j = 0; j < 6; j++) objArray2[i][j] = 0;
-     // Grid 2
-     for (int i = NUM_ROCKS/2; i < NUM_ROCKS; i++) {
-       setGridPos2(rockPntArray[i]);
-       rockArray[i].setPoint(rockPntArray[i]);
-     }
-     for (int i = NUM_SHARKS/2; i < NUM_SHARKS; i++) {
-       setGridPos2(sharkPntArray[i]);
-       sharkArray[i].setPoint(sharkPntArray[i]);
-     }
-     for (int i = NUM_SQUIDS/2; i < NUM_SQUIDS; i++) {
-       setGridPos2(squidPntArray[i]);
-       squidArray[i].setPoint(squidPntArray[i]);
-     }
-
+     for (int i = NUM_ROCKS/2; i < NUM_ROCKS; i++) rockArray[i].setPoint(setGridPos2(rockPntArray[i]));
+     for (int i = NUM_SHARKS/2; i < NUM_SHARKS; i++) sharkArray[i].setPoint(setGridPos2(sharkPntArray[i]));
+     for (int i = NUM_SQUIDS/2; i < NUM_SQUIDS; i++) squidArray[i].setPoint(setGridPos2(squidPntArray[i]));
    }
 
    @Override
@@ -209,21 +202,25 @@ public class GameplayScreen extends JComponent{
       Area playerHitBox = null;
       Area objectHitBox = null;
       int x, y;
+      int[] xPoints = null;
+      int[] yPoints = null;
 
-      // Water
-      graphicsObj.setColor(new Color(0, 20, 255));
-      graphicsObj.fill(new Rectangle(0, 50, 800, 325));
-      // Sand
-      graphicsObj.setColor(new Color(190, 180, 130));
-      graphicsObj.fill(new Rectangle(0, 25, 800, 50));
-      // Sky
-      graphicsObj.setColor(new Color(0, 200, 255));
-      graphicsObj.fill(new Rectangle(0, 0, 800, 25));
-      // Sun
-      graphicsObj.setColor(new Color(255, 255, 50));
-      graphicsObj.fill(new Double(700, 0, 20, 20));
+      { // BackGrounds
+        // Water
+        graphicsObj.setColor(new Color(0, 20, 255));
+        graphicsObj.fill(new Rectangle(0, 50, 800, 325));
+        // Sand
+        graphicsObj.setColor(new Color(190, 180, 130));
+        graphicsObj.fill(new Rectangle(0, 25, 800, 50));
+        // Sky
+        graphicsObj.setColor(new Color(0, 200, 255));
+        graphicsObj.fill(new Rectangle(0, 0, 800, 25));
+        // Sun
+        graphicsObj.setColor(new Color(255, 255, 50));
+        graphicsObj.fill(new Double(700, 0, 20, 20));
+      }
 
-      { // Pier1
+      { // Pier
         for (int i = 0; i < NUM_PIERS; i++) {
           x = pierArray[i].getX();
             // Dock
@@ -248,30 +245,34 @@ public class GameplayScreen extends JComponent{
       }
 
       { // Beach Ball
-        x = bBall1.getX();
-        y = bBall1.getY();
-        graphicsObj.setColor(new Color(200, 50, 50));
-        graphicsObj.fill(new Double(x, y, 15, 15));
+        for (int i = 0; i < NUM_BBALLS; i++) {
+          x = bBallArray[i].getX();
+          y = bBallArray[i].getY();
+          graphicsObj.setColor(new Color(200, 50, 50));
+          graphicsObj.fill(new Double(x, y, 15, 15));
+        }
       }
 
       { // bTowels (and Umbrella)
-        x = bTowels.getX();
-        y = bTowels.getY();
-          // Towel1
-          graphicsObj.setColor(new Color(200, 47, 13));
-          graphicsObj.fill(new Rectangle(x, y + 2, 10, 15));
-          // Towel2
-          graphicsObj.setColor(new Color(47, 170, 33));
-          graphicsObj.fill(new Rectangle(x + 14, y, 10, 15));
-          // Towel3
-          graphicsObj.setColor(new Color(13, 67, 150));
-          graphicsObj.fill(new Rectangle(x + 28, y + 3, 10, 15));
-          // Umbrella - handle
-          graphicsObj.setColor(new Color(0, 0, 0));
-          graphicsObj.fill(new Rectangle(x - 5, y - 15, 3, 20));
-          // Umbrella - Cover
-          graphicsObj.setColor(new Color(120, 0, 0));
-          graphicsObj.fillArc(x - 20, y - 20, 30, 20, 0, 180);
+        for (int i = 0; i < NUM_BTOWELS; i++) {
+          x = bTowelsArray[i].getX();
+          y = bTowelsArray[i].getY();
+            // Towel1
+            graphicsObj.setColor(new Color(200, 47, 13));
+            graphicsObj.fill(new Rectangle(x, y + 2, 10, 15));
+            // Towel2
+            graphicsObj.setColor(new Color(47, 170, 33));
+            graphicsObj.fill(new Rectangle(x + 14, y, 10, 15));
+            // Towel3
+            graphicsObj.setColor(new Color(13, 67, 150));
+            graphicsObj.fill(new Rectangle(x + 28, y + 3, 10, 15));
+            // Umbrella - handle
+            graphicsObj.setColor(new Color(0, 0, 0));
+            graphicsObj.fill(new Rectangle(x - 5, y - 15, 3, 20));
+            // Umbrella - Cover
+            graphicsObj.setColor(new Color(120, 0, 0));
+            graphicsObj.fillArc(x - 20, y - 20, 30, 20, 0, 180);
+        }
       }
 
       {  //Palm Tree 1
@@ -305,6 +306,7 @@ public class GameplayScreen extends JComponent{
           ellipse = new Double(x, y, PLAYER_WIDTH, PLAYER_HEIGHT);
           graphicsObj.setColor(new Color(128, 0, 0));
           graphicsObj.fill(ellipse);
+          ellipse = new Double(x + 15, y, 20, 10);
           playerHitBox = new Area(ellipse);
       }
 
@@ -424,7 +426,7 @@ public class GameplayScreen extends JComponent{
         }
       }
 
-      { // Player (Person)
+      { // Player (Stick Figure)
         x = player.getX() - 2;
         y = player.getY() - 2;
           // Head
