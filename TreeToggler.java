@@ -16,6 +16,7 @@ PC User
 CSCE-111-503
 */
 public class TreeToggler extends JFrame implements ActionListener {
+  //creates private class variables that get used in the program:
   private JLabel aggieTree;
   private String[] starsOnNames = {"blue.jpg", "cyan.jpg", "maroon.jpg", "orange.jpg", "pink.jpg",
     "purple.jpg", "red.jpg", "yellow.jpg"};
@@ -170,13 +171,4 @@ public class TreeToggler extends JFrame implements ActionListener {
       }
     }
   }//end actionPerformed
-
-
-  public static void main(String[] args) {
-    TreeToggler toggle = new TreeToggler();
-    toggle.pack();
-    toggle.setLocationRelativeTo(null);
-    toggle.setVisible(true);
-
-  }
-}
+}// end class
