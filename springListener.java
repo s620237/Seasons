@@ -74,7 +74,7 @@ class ImagePanelA extends JPanel {
     pick = new JButton("Pick a petal");
     pick.addActionListener(FortuneButton);
 
-    JLabel intro = new JLabel("Howdy! Welcome to the Roamnce Fortune Teller!");
+    JLabel intro = new JLabel("Howdy! Welcome to the Romance Fortune Teller!");
     JPanel introPanel = new JPanel();
     introPanel.setBackground(Color.white);
     introPanel.add(intro);
