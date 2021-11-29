@@ -6,11 +6,6 @@ import javax.swing.JTextField;
 class summerListener implements ActionListener {
 
   public void actionPerformed(ActionEvent event) {
-    JFrame arbys = new JFrame();
-    arbys.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-    arbys.setLocationRelativeTo(null);
-    arbys.pack();
-    arbys.setVisible(true);
-
+    SummerFrame arbys = new SummerFrame();
   }
 }
