@@ -1,8 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -20,7 +20,7 @@ JosephGallucciEx7.java 10/22/21
 Platform: Windows
 */
 
-public class SummerFrame extends JFrame implements KeyListener {
+public class SummerFrame extends JFrame implements KeyListener, MouseListener {
   private boolean moveLeft = false, moveRight = false, moveUp = false, moveDown = false;
   private boolean delay = false;
   private Timer timer = new Timer();
@@ -30,24 +30,26 @@ public class SummerFrame extends JFrame implements KeyListener {
   TimerTask aTask = new TimerTask() {
     @Override
     public void run() {
-      screen.repaint();
-      screen.playerMove(moveUp, moveLeft, moveDown, moveRight);
-      screen.objectsMove();
-      // Crash Event
-      if (screen.getObjCollide() && delay == false) {
-        delay = true;
-        screen.setBlackOut(true);
-        Timer delayStart = new Timer();
-        screen.startPosition();
-        delayStart.schedule(new TimerTask() {
-          @Override
-          public void run() {
-            delay = false;
-            screen.setBlackOut(false);
-            screen.setPlayerScore(0);
-            delayStart.cancel();
-            }
-          }, DELAY_TIME);
+      if (screen.getInstruction() == false) {
+        screen.repaint();
+        screen.playerMove(moveUp, moveLeft, moveDown, moveRight);
+        screen.objectsMove();
+        // Crash Event
+        if (screen.getObjCollide() && delay == false) {
+          delay = true;
+          screen.setBlackOut(true);
+          Timer delayStart = new Timer();
+          screen.startPosition();
+          delayStart.schedule(new TimerTask() {
+            @Override
+            public void run() {
+              delay = false;
+              screen.setBlackOut(false);
+              screen.setPlayerScore(0);
+              delayStart.cancel();
+              }
+            }, DELAY_TIME);
+        }
       }
     }
   };
@@ -56,6 +58,7 @@ public class SummerFrame extends JFrame implements KeyListener {
   SummerFrame() {
     setTitle("SummerFrame");
     addKeyListener(this);
+    addMouseListener(this);
     setFocusable(true);
     setFocusTraversalKeysEnabled(false);
     add(screen);
@@ -86,4 +89,13 @@ public class SummerFrame extends JFrame implements KeyListener {
   }
   public void keyTyped(KeyEvent e) {}
 
+  public void mouseClicked(MouseEvent e) {
+    int x = e.getX();
+    int y = e.getY();
+    if (x < 505 && x > 305 && y > 225 && y < 280) screen.setInstruction(false);
+  }
+  public void mouseExited(MouseEvent e) {}
+  public void mouseEntered(MouseEvent e) {}
+  public void mouseReleased(MouseEvent e) {}
+  public void mousePressed(MouseEvent e) {}
 }
