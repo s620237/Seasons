@@ -56,7 +56,7 @@ public class SummerFrame extends JFrame implements KeyListener, MouseListener {
 
   // Frame for the main Program
   SummerFrame() {
-    setTitle("SummerFrame");
+    setTitle("Wave Rider");
     addKeyListener(this);
     addMouseListener(this);
     setFocusable(true);
@@ -94,8 +94,10 @@ public class SummerFrame extends JFrame implements KeyListener, MouseListener {
     int y = e.getY();
     if (x < 505 && x > 305 && y > 225 && y < 280) screen.setInstruction(false);
   }
+  @Override
   public void mouseExited(MouseEvent e) {}
   public void mouseEntered(MouseEvent e) {}
   public void mouseReleased(MouseEvent e) {}
   public void mousePressed(MouseEvent e) {}
+
 }
