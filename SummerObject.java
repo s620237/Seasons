@@ -26,7 +26,7 @@ class SummerObject {
     this.yPos = pnt.getY();
     this.speed = 0.25;
   }
-  // Moves obstacles from left to right at a determined speed
+  // Moves obstacles from right to left at a determined speed
   public void moveObject(double newSpeed) {
     xPos = xPos - speed;
     speed = newSpeed;
