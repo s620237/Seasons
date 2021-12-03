@@ -12,8 +12,8 @@ import java.awt.Font;
 import java.util.Random;
 import java.awt.Point;
 
-// HistogramComponent extends the functionality of a JComponent
-// in order to draw a histogram.
+// GameplayScreen extends the functionality of a JComponent
+// in order to draw and implement a playing field
 public class GameplayScreen extends JComponent{
    // Player Info
    private int PLAYER_WIDTH = 50;
