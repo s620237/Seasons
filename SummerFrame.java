@@ -19,7 +19,14 @@ CSCE 111: section 503
 JosephGallucciEx7.java 10/22/21
 Platform: Windows
 */
-
+/*
+Summer Sources:
+https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html - Timers
+https://docs.oracle.com/javase/7/docs/api/javax/swing/JComponent.html - JComponent
+https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html - graphics2D
+https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html - KeyEvent
+https://docs.oracle.com/javase/7/docs/api/java/awt/event/MouseEvent.html - MouseEvent
+*/
 public class SummerFrame extends JFrame implements KeyListener, MouseListener {
   private boolean moveLeft = false, moveRight = false, moveUp = false, moveDown = false;
   private boolean delay = false;
